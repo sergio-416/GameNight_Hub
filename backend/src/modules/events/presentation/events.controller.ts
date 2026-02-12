@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
-import { EventsService } from '../application/events.service';
+import { EventsService } from '@events/application/events.service';
 
 @Controller('events')
 export class EventsController {

@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventsController } from './events.controller';
-import { EventsService } from '../application/events.service';
+import { EventsService } from '@events/application/events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { beforeEach, describe, expect, it, vi } from 'vitest';

@@ -8,10 +8,11 @@ import {
   BoardGame,
   BoardGameSchema,
 } from './infrastructure/persistence/mongodb/game.schema';
+import { BggCsvService } from './application/bgg-csv.service';
 
 @Module({
   controllers: [GamesController],
-  providers: [GamesService, BggIntegrationService],
+  providers: [GamesService, BggIntegrationService, BggCsvService],
   imports: [
     HttpModule,
     MongooseModule.forFeature([

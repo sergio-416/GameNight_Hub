@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventsService } from './events.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { Event } from '../infrastructure/persistence/mongodb/event.schema';
-import { CreateEventDto } from '../presentation/dto/create-event.dto';
-import { UpdateEventDto } from '../presentation/dto/update-event.dto';
+import { Event } from '@events/infrastructure/persistence/mongodb/event.schema';
+import { CreateEventDto } from '@events/presentation/dto/create-event.dto';
+import { UpdateEventDto } from '@events/presentation/dto/update-event.dto';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('EventsService', () => {
