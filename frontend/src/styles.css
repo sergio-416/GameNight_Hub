@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import 'tailwindcss';
+
+body {
+	font-family:
+		'Outfit',
+		system-ui,
+		-apple-system,
+		sans-serif;
+	line-height: 1.5;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--color-slate-50);
+	color: var(--color-slate-500);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+button {
+	border: none;
+	cursor: pointer;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+.hover\:text-emerald-500:hover {
+	color: hsl(160 84% 39%) !important;
+}
+
+.px-6 {
+	padding-left: 1.5rem !important;
+	padding-right: 1.5rem !important;
+}
+
+@theme {
+	--color-emerald-50: hsl(150 80% 96%);
+	--color-emerald-100: hsl(149 80% 90%);
+	--color-emerald-200: hsl(152 69% 80%);
+	--color-emerald-300: hsl(156 64% 70%);
+	--color-emerald-400: hsl(158 64% 52%);
+	--color-emerald-500: hsl(160 84% 39%);
+	--color-emerald-600: hsl(161 94% 30%);
+	--color-emerald-700: hsl(162 93% 24%);
+
+	--color-slate-50: hsl(210 40% 98%);
+	--color-slate-100: hsl(210 40% 96%);
+	--color-slate-200: hsl(214 32% 91%);
+	--color-slate-300: hsl(213 27% 84%);
+	--color-slate-400: hsl(215 20% 65%);
+	--color-slate-500: hsl(215 16% 47%);
+	--color-slate-600: hsl(215 19% 35%);
+	--color-slate-700: hsl(215 25% 27%);
+	--color-slate-800: hsl(217 33% 17%);
+	--color-slate-900: hsl(222 47% 11%);
+
+	--color-danger: hsl(0 84% 60%);
+	--color-warning: hsl(38 92% 50%);
+	--color-info: hsl(215 75% 60%);
+	--color-success: hsl(160 84% 39%);
+
+	--color-home: var(--color-emerald-500);
+	--color-collection: hsl(215 75% 60%);
+	--color-game-nights: hsl(332 100% 50%);
+	--color-calendar: var(--color-warning);
+	--color-stats: hsl(215 75% 60%);
+
+	--font-weight-thin: 100;
+	--font-weight-extralight: 200;
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+	--font-weight-extrabold: 800;
+	--font-weight-black: 900;
+}

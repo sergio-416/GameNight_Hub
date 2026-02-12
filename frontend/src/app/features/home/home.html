@@ -1,0 +1,84 @@
+<main class="min-h-screen bg-slate-50">
+	<section class="py-20 lg:py-28">
+		<div class="container mx-auto grid items-center gap-12 px-6 lg:grid-cols-2">
+			<div>
+				<h1 class="mb-6 text-4xl font-bold text-slate-800 lg:text-5xl">
+					Your Board Game Community, Organized
+				</h1>
+				<p class="mb-8 text-lg leading-relaxed text-slate-600">
+					Track your collection, organize game nights, and connect with fellow board game
+					enthusiasts in Spain.
+				</p>
+
+				<div class="flex flex-wrap gap-4">
+					<a
+						routerLink="/collection"
+						class="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded bg-emerald-500 px-6 text-base font-medium tracking-wide whitespace-nowrap text-white transition duration-300 hover:bg-emerald-600 focus:bg-emerald-700 focus-visible:outline-none"
+					>
+						<span>Browse Collection</span>
+					</a>
+
+					<a
+						routerLink="/game-nights"
+						class="inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded border-2 border-emerald-500 px-6 text-base font-medium tracking-wide text-emerald-500 transition duration-300 hover:bg-emerald-50 focus:bg-emerald-100 focus-visible:outline-none"
+					>
+						<span>Find Game Nights</span>
+					</a>
+				</div>
+			</div>
+
+			<div
+				class="hidden aspect-square items-center justify-center rounded-xl bg-slate-200 lg:block"
+			>
+				<span class="text-slate-400">Image coming soon...</span>
+			</div>
+		</div>
+	</section>
+
+	<section class="py-16">
+		<div class="container mx-auto px-6">
+			<div class="grid gap-8 md:grid-cols-3">
+				<article
+					class="overflow-hidden rounded-lg bg-white text-center text-slate-500 shadow-md shadow-slate-200"
+				>
+					<figure class="p-8 pb-0">
+						<fa-icon [icon]="diceIcon" size="4x" class="text-emerald-500"> </fa-icon>
+					</figure>
+
+					<div class="p-8">
+						<h3 class="mb-4 text-4xl font-semibold text-slate-700">Build</h3>
+						<p class="text-slate-500">
+							Build your personal board game library with ratings and notes
+						</p>
+					</div>
+				</article>
+
+				<article
+					class="overflow-hidden rounded-lg bg-white text-center text-slate-500 shadow-md shadow-slate-200"
+				>
+					<figure class="p-8 pb-0">
+						<fa-icon [icon]="calendarIcon" size="4x" class="text-emerald-500"> </fa-icon>
+					</figure>
+
+					<div class="p-8">
+						<h3 class="mb-4 text-4xl font-semibold text-slate-700">Organize</h3>
+						<p class="text-slate-500">Schedule game nights and invite friends to join</p>
+					</div>
+				</article>
+
+				<article
+					class="overflow-hidden rounded-lg bg-white text-center text-slate-500 shadow-md shadow-slate-200"
+				>
+					<figure class="p-8 pb-0">
+						<fa-icon [icon]="mapPinIcon" size="4x" class="text-emerald-500"> </fa-icon>
+					</figure>
+
+					<div class="p-8">
+						<h3 class="mb-4 text-4xl font-semibold text-slate-700">Discover</h3>
+						<p class="text-slate-500">Find local events and connect with fellow gamers</p>
+					</div>
+				</article>
+			</div>
+		</div>
+	</section>
+</main>

@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./dist",
+    "paths": {
+      "@/*": ["./*"],
+      "@games/*": ["./games/*"],
+      "@locations/*": ["./locations/*"],
+      "@auth/*": ["./auth/*"],
+      "@application/*": ["./auth/application/*"]
+    }
+  }
+}

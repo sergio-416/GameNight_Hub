@@ -1,0 +1,52 @@
+<div class="stats-dashboard p-4" data-testid="stats-dashboard">
+	<h1 class="mb-6 text-2xl font-bold">Collection Statistics</h1>
+
+	@if (statsResource.isLoading()) {
+	<div class="loading-state py-8 text-center">
+		<p class="text-gray-600">Loading statistics...</p>
+	</div>
+	} @if (statsResource.error()) {
+	<div class="error-state py-8 text-center text-red-600">
+		<p>Failed to load statistics</p>
+	</div>
+	} @if (!statsResource.isLoading() && !statsResource.error() && statsResource.hasValue() &&
+	totalGames() === 0) {
+	<div class="empty-state py-8 text-center">
+		<p class="text-gray-600">No statistics yet</p>
+		<p class="text-sm text-gray-500">Add some games to see your collection analytics!</p>
+	</div>
+	} @if (!statsResource.isLoading() && !statsResource.error() && statsResource.hasValue() &&
+	totalGames() > 0) {
+	<div class="charts-grid grid grid-cols-1 gap-6 lg:grid-cols-2">
+		<div class="chart-card rounded-lg bg-white p-4 shadow" data-testid="games-by-category-chart">
+			<apx-chart
+				[series]="gamesByCategoryOptions().series!"
+				[chart]="gamesByCategoryOptions().chart!"
+				[title]="gamesByCategoryOptions().title!"
+				[xaxis]="gamesByCategoryOptions().xaxis!"
+			></apx-chart>
+		</div>
+
+		<div class="chart-card rounded-lg bg-white p-4 shadow" data-testid="collection-growth-chart">
+			<apx-chart
+				[series]="collectionGrowthOptions().series!"
+				[chart]="collectionGrowthOptions().chart!"
+				[title]="collectionGrowthOptions().title!"
+				[xaxis]="collectionGrowthOptions().xaxis!"
+			></apx-chart>
+		</div>
+
+		<div
+			class="chart-card rounded-lg bg-white p-4 shadow"
+			data-testid="complexity-distribution-chart"
+		>
+			<apx-chart
+				[series]="complexityDistributionOptions().series!"
+				[chart]="complexityDistributionOptions().chart!"
+				[title]="complexityDistributionOptions().title!"
+				[labels]="complexityDistributionOptions().labels!"
+			></apx-chart>
+		</div>
+	</div>
+	}
+</div>

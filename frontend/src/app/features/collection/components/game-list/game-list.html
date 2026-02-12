@@ -1,0 +1,10 @@
+<div data-testid="game-list">
+	@if (loading()) {
+	<p>Loading games...</p>
+	} @else if (games().length === 0) {
+	<p>No games yet</p>
+	<p>Import your first game</p>
+	} @else { @for (game of games(); track game._id) {
+	<div data-testid="game-item">{{ game.name }}</div>
+	} }
+</div>

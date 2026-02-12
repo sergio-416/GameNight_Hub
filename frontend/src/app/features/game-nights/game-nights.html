@@ -1,0 +1,8 @@
+<section class="game-nights-container">
+	<h1>Game Night Locations</h1>
+	<p>Find board game cafes, stores, and meetup spots near you!</p>
+
+	<app-venue-filter (filterChange)="onFilterChange($event)"></app-venue-filter>
+
+	<app-map [venueTypes]="selectedVenueTypes()"></app-map>
+</section>

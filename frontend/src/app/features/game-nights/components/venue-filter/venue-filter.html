@@ -1,0 +1,10 @@
+<section>
+	<div>
+		@for (type of venueTypes; track type.value) {
+		<label>
+			<input type="checkbox" [checked]="isSelected(type.value)" (change)="toggleType(type.value)" />
+			<span>{{ type.label }}</span>
+		</label>
+		}
+	</div>
+</section>

@@ -1,0 +1,26 @@
+<div class="calendar-container p-4" data-testid="calendar-container">
+	@if (loading()) {
+	<div class="loading-state py-8 text-center">
+		<p class="text-gray-600">Loading events...</p>
+	</div>
+	} @if (error()) {
+	<div class="error-state py-8 text-center text-red-600">
+		<p>{{ error() }}</p>
+	</div>
+	} @if (!loading() && !error() && events().length === 0) {
+	<div class="empty-state py-8 text-center">
+		<p class="text-gray-600">No events yet</p>
+		<p class="text-sm text-gray-500">Create your first game night!</p>
+	</div>
+	} @if (!loading() && !error()) {
+	<full-calendar [options]="calendarOptions"></full-calendar>
+	}
+	<app-event-modal
+		[isOpen]="modalOpen()"
+		[event]="selectedEvent()"
+		(saved)="onModalSaved($event)"
+		(deleted)="onModalDeleted($event)"
+		(closed)="closeModal()"
+	>
+	</app-event-modal>
+</div>

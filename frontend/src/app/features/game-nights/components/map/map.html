@@ -1,0 +1,7 @@
+@if (loading()) {
+<div data-testid="loading-indicator">Loading locations...</div>
+} @if (error()) {
+<div data-testid="error-message">{{ error() }}</div>
+}
+
+<div #mapContainer data-testid="map-container" class="map-container"></div>

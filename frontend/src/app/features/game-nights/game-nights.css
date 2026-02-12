@@ -1,0 +1,16 @@
+.game-nights-container {
+	padding: 1rem;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.game-nights-container h1 {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
+.game-nights-container p {
+	color: #666;
+	margin-bottom: 1rem;
+}
