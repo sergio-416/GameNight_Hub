@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { GamesModule } from './modules/games/games.module';
 import { LocationsModule } from './modules/locations/locations.module';
 import { EventsModule } from './modules/events/events.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { EventsModule } from './modules/events/events.module';
     GamesModule,
     LocationsModule,
     EventsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
