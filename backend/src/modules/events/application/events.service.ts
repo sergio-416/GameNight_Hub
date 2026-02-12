@@ -4,9 +4,9 @@ import { Model } from 'mongoose';
 import {
   Event,
   EventDocument,
-} from '../infrastructure/persistence/mongodb/event.schema';
-import { CreateEventDto } from '../presentation/dto/create-event.dto';
-import { UpdateEventDto } from '../presentation/dto/update-event.dto';
+} from '@events/infrastructure/persistence/mongodb/event.schema';
+import { CreateEventDto } from '@events/presentation/dto/create-event.dto';
+import { UpdateEventDto } from '@events/presentation/dto/update-event.dto';
 
 @Injectable()
 export class EventsService {

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { GamesModule } from './modules/games/games.module';
-import { LocationsModule } from './modules/locations/locations.module';
-import { EventsModule } from './modules/events/events.module';
-import { AuthModule } from './auth/auth.module';
+import { AppController } from '@/app.controller';
+import { AppService } from '@/app.service';
+import { GamesModule } from '@modules/games/games.module';
+import { LocationsModule } from '@modules/locations/locations.module';
+import { EventsModule } from '@modules/events/events.module';
+import { AuthModule } from '@modules/auth/auth.module';
 
 @Module({
   imports: [

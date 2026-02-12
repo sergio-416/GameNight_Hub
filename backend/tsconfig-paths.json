@@ -9,7 +9,9 @@
       "@application/*": ["./auth/application/*"],
       "@domain/*": ["./auth/domain/*"],
       "@infrastructure/*": ["./auth/infrastructure/*"],
-      "@presentation/*": ["./auth/presentation/*"]
+      "@presentation/*": ["./auth/presentation/*"],
+      "@modules/*": ["./modules/*"],
+      "@events/*": ["./events/*"]
     }
   }
 }

@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from './auth.controller.js';
-import { AuthService } from '@application/auth.service.js';
+import { AuthController } from './auth.controller';
+import { AuthService } from '@application/auth.service';
 import { vi } from 'vitest';
 import { UnauthorizedException } from '@nestjs/common';
-import { AuthUser } from '@domain/interfaces/auth-user.interface.js';
+import { AuthUser } from '@domain/interfaces/auth-user.interface';
 
 describe('AuthController', () => {
   let controller: AuthController;

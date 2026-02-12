@@ -1,9 +1,9 @@
 import { ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { FirebaseAuthGuard } from './firebase-auth.guard.js';
-import { AuthService } from '@application/auth.service.js';
+import { FirebaseAuthGuard } from './firebase-auth.guard';
+import { AuthService } from '@application/auth.service';
 import { vi } from 'vitest';
-import { AuthRequest } from '@domain/types/auth-request.type.js';
-import { AuthUser } from '@domain/interfaces/auth-user.interface.js';
+import { AuthRequest } from '@domain/types/auth-request.type';
+import { AuthUser } from '@domain/interfaces/auth-user.interface';
 
 describe('FirebaseAuthGuard', () => {
   let guard: FirebaseAuthGuard;

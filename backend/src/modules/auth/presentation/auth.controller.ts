@@ -1,6 +1,6 @@
 import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from '@application/auth.service';
-import { VerifyTokenDto } from './dto/verify-token.dto';
+import { VerifyTokenDto } from '@presentation/dto/verify-token.dto';
 
 @Controller('auth')
 export class AuthController {

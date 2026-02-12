@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service.js';
+import { AuthService } from '@application/auth.service';
 import { UnauthorizedException } from '@nestjs/common';
-import { AuthUser } from '@domain/interfaces/auth-user.interface.js';
+import { AuthUser } from '@domain/interfaces/auth-user.interface';
 
 describe('AuthService', () => {
   let service: AuthService;
