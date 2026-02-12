@@ -22,7 +22,10 @@
       "@events/*": ["src/modules/events/*"],
       "@locations/*": ["src/modules/locations/*"],
       "@auth/*": ["src/modules/auth/*"],
-      "@application/*": ["src/modules/auth/application/*"]
+      "@application/*": ["src/modules/auth/application/*"],
+      "@domain/*": ["src/modules/auth/domain/*"],
+      "@infrastructure/*": ["src/modules/auth/infrastructure/*"],
+      "@presentation/*": ["src/modules/auth/presentation/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

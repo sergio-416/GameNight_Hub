@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
+import { AuthController } from './auth.controller.js';
+import { AuthService } from '@application/auth.service.js';
 import { vi } from 'vitest';
 import { UnauthorizedException } from '@nestjs/common';
+import { AuthUser } from '@domain/interfaces/auth-user.interface.js';
 
 describe('AuthController', () => {
   let controller: AuthController;
 
   const mockAuthService = {
     verifyToken: vi.fn(),
-    extractTokenFromHeader: vi.fn(),
   };
 
   beforeEach(async () => {
@@ -31,7 +31,10 @@ describe('AuthController', () => {
   describe('verify', () => {
     it('should return user data when valid token provided', () => {
       const token = 'valid-firebase-token';
-      const expectedUser = { uid: 'test-user-123', email: 'test@example.com' };
+      const expectedUser: AuthUser = {
+        uid: 'user-123',
+        email: 'test@test.com',
+      };
       mockAuthService.verifyToken.mockReturnValue(expectedUser);
 
       const result = controller.verify({ token });
@@ -47,6 +50,15 @@ describe('AuthController', () => {
       });
 
       expect(() => controller.verify({ token })).toThrow(UnauthorizedException);
+    });
+
+    it('should throw UnauthorizedException when no token provided', () => {
+      expect(() => controller.verify({ token: '' })).toThrow(
+        UnauthorizedException,
+      );
+      expect(() =>
+        controller.verify({ token: null as unknown as string }),
+      ).toThrow(UnauthorizedException);
     });
   });
 });

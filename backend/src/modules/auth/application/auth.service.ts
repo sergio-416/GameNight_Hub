@@ -1,8 +1,9 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { AuthUser } from '@domain/interfaces/auth-user.interface';
 
 @Injectable()
 export class AuthService {
-  verifyToken(token: string): { uid: string; email: string } {
+  verifyToken(token: string): AuthUser {
     if (!token || token.trim() === '') {
       throw new UnauthorizedException('No token provided');
     }

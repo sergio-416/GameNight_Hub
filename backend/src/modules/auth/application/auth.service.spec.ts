@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
+import { AuthService } from './auth.service.js';
 import { UnauthorizedException } from '@nestjs/common';
+import { AuthUser } from '@domain/interfaces/auth-user.interface.js';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -34,7 +35,7 @@ describe('AuthService', () => {
 
     it('should return decoded user when valid token provided', () => {
       const validToken = 'valid-firebase-token';
-      const expectedUser = {
+      const expectedUser: AuthUser = {
         uid: 'test-user-123',
         email: 'test@example.com',
       };
