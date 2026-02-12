@@ -21,7 +21,7 @@ describe('FirebaseAuthGuard', () => {
   const createMockContext = (authHeader?: string): ExecutionContext => {
     const mockRequest: AuthRequest = {
       headers: authHeader ? { authorization: authHeader } : {},
-    };
+    } as AuthRequest;
 
     return {
       switchToHttp: () => ({
@@ -31,14 +31,14 @@ describe('FirebaseAuthGuard', () => {
   };
 
   describe('canActivate', () => {
-    it('should return true when valid token provided', () => {
+    it('should return true when valid token provided', async () => {
       const context = createMockContext('Bearer valid-token');
       const decodedUser: AuthUser = { uid: 'user-123', email: 'test@test.com' };
 
       mockAuthService.extractTokenFromHeader.mockReturnValue('valid-token');
-      mockAuthService.verifyToken.mockReturnValue(decodedUser);
+      mockAuthService.verifyToken.mockResolvedValue(decodedUser);
 
-      const result = guard.canActivate(context);
+      const result = await guard.canActivate(context);
 
       expect(result).toBe(true);
       expect(mockAuthService.extractTokenFromHeader).toHaveBeenCalledWith(
@@ -47,42 +47,48 @@ describe('FirebaseAuthGuard', () => {
       expect(mockAuthService.verifyToken).toHaveBeenCalledWith('valid-token');
     });
 
-    it('should attach decoded user to request when token valid', () => {
+    it('should attach decoded user to request when token valid', async () => {
       const context = createMockContext('Bearer valid-token');
       const decodedUser: AuthUser = { uid: 'user-123', email: 'test@test.com' };
 
       mockAuthService.extractTokenFromHeader.mockReturnValue('valid-token');
-      mockAuthService.verifyToken.mockReturnValue(decodedUser);
+      mockAuthService.verifyToken.mockResolvedValue(decodedUser);
 
-      guard.canActivate(context);
+      await guard.canActivate(context);
 
       const request = context.switchToHttp().getRequest<AuthRequest>();
       expect(request.user).toEqual(decodedUser);
     });
 
-    it('should throw UnauthorizedException when no authorization header', () => {
+    it('should throw UnauthorizedException when no authorization header', async () => {
       const context = createMockContext();
 
-      expect(() => guard.canActivate(context)).toThrow(UnauthorizedException);
+      await expect(guard.canActivate(context)).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
 
-    it('should throw UnauthorizedException when no token in header', () => {
+    it('should throw UnauthorizedException when no token in header', async () => {
       const context = createMockContext('Bearer ');
 
       mockAuthService.extractTokenFromHeader.mockReturnValue(null);
 
-      expect(() => guard.canActivate(context)).toThrow(UnauthorizedException);
+      await expect(guard.canActivate(context)).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
 
-    it('should throw UnauthorizedException when token is invalid', () => {
+    it('should throw UnauthorizedException when token is invalid', async () => {
       const context = createMockContext('Bearer invalid-token');
 
       mockAuthService.extractTokenFromHeader.mockReturnValue('invalid-token');
-      mockAuthService.verifyToken.mockImplementation(() => {
-        throw new UnauthorizedException();
-      });
+      mockAuthService.verifyToken.mockRejectedValue(
+        new UnauthorizedException(),
+      );
 
-      expect(() => guard.canActivate(context)).toThrow(UnauthorizedException);
+      await expect(guard.canActivate(context)).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
   });
 });

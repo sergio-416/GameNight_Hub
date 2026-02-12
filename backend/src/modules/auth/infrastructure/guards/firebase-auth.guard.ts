@@ -11,7 +11,7 @@ import { AuthRequest } from '@domain/types/auth-request.type';
 export class FirebaseAuthGuard implements CanActivate {
   constructor(private readonly authService: AuthService) {}
 
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<AuthRequest>();
     const authHeader = request.headers.authorization;
 
@@ -26,7 +26,7 @@ export class FirebaseAuthGuard implements CanActivate {
     }
 
     try {
-      const decodedUser = this.authService.verifyToken(token);
+      const decodedUser = await this.authService.verifyToken(token);
       request.user = decodedUser;
       return true;
     } catch {

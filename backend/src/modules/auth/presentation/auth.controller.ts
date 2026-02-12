@@ -7,11 +7,10 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('verify')
-  verify(@Body() body: VerifyTokenDto) {
+  async verify(@Body() body: VerifyTokenDto) {
     if (!body.token) {
       throw new UnauthorizedException('No token provided');
     }
-
-    return this.authService.verifyToken(body.token);
+    return await this.authService.verifyToken(body.token);
   }
 }

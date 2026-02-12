@@ -29,36 +29,35 @@ describe('AuthController', () => {
   });
 
   describe('verify', () => {
-    it('should return user data when valid token provided', () => {
+    it('should return user data when valid token provided', async () => {
       const token = 'valid-firebase-token';
       const expectedUser: AuthUser = {
         uid: 'user-123',
         email: 'test@test.com',
       };
-      mockAuthService.verifyToken.mockReturnValue(expectedUser);
+      mockAuthService.verifyToken.mockResolvedValue(expectedUser);
 
-      const result = controller.verify({ token });
+      const result = await controller.verify({ token });
 
       expect(result).toEqual(expectedUser);
       expect(mockAuthService.verifyToken).toHaveBeenCalledWith(token);
     });
 
-    it('should throw UnauthorizedException when token is invalid', () => {
+    it('should throw UnauthorizedException when token is invalid', async () => {
       const token = 'invalid-token';
-      mockAuthService.verifyToken.mockImplementation(() => {
-        throw new UnauthorizedException();
-      });
+      mockAuthService.verifyToken.mockRejectedValue(
+        new UnauthorizedException(),
+      );
 
-      expect(() => controller.verify({ token })).toThrow(UnauthorizedException);
-    });
-
-    it('should throw UnauthorizedException when no token provided', () => {
-      expect(() => controller.verify({ token: '' })).toThrow(
+      await expect(controller.verify({ token })).rejects.toThrow(
         UnauthorizedException,
       );
-      expect(() =>
-        controller.verify({ token: null as unknown as string }),
-      ).toThrow(UnauthorizedException);
+    });
+
+    it('should throw UnauthorizedException when no token provided', async () => {
+      await expect(controller.verify({ token: '' })).rejects.toThrow(
+        UnauthorizedException,
+      );
     });
   });
 });

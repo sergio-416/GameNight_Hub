@@ -1,79 +1,96 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from '@application/auth.service';
 import { UnauthorizedException } from '@nestjs/common';
-import { AuthUser } from '@domain/interfaces/auth-user.interface';
+import { vi } from 'vitest';
+import { FirebaseAdminProvider } from '@infrastructure/firebase/firebase-admin.provider';
+
+const mockVerifyIdToken = vi.fn();
+const mockGetAuth = vi.fn().mockReturnValue({
+  verifyIdToken: mockVerifyIdToken,
+});
+
+const mockFirebaseAdminProvider = {
+  getAuth: mockGetAuth,
+};
 
 describe('AuthService', () => {
   let service: AuthService;
 
   beforeEach(async () => {
+    vi.clearAllMocks();
+
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService],
+      providers: [
+        AuthService,
+        {
+          provide: FirebaseAdminProvider,
+          useValue: mockFirebaseAdminProvider,
+        },
+      ],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
   });
 
   describe('verifyToken', () => {
-    it('should throw UnauthorizedException when no token provided', () => {
-      expect(() => service.verifyToken('')).toThrow(UnauthorizedException);
-      expect(() => service.verifyToken(null as unknown as string)).toThrow(
-        UnauthorizedException,
-      );
-      expect(() => service.verifyToken(undefined as unknown as string)).toThrow(
+    it('should throw UnauthorizedException when no token provided', async () => {
+      await expect(service.verifyToken('')).rejects.toThrow(
         UnauthorizedException,
       );
     });
 
-    it('should throw UnauthorizedException for malformed token', () => {
-      const malformedToken = 'not-a-valid-token';
+    it('should throw UnauthorizedException for invalid token', async () => {
+      mockVerifyIdToken.mockRejectedValue(new Error('Invalid token'));
 
-      expect(() => service.verifyToken(malformedToken)).toThrow(
+      await expect(service.verifyToken('invalid-token')).rejects.toThrow(
         UnauthorizedException,
       );
     });
 
-    it('should return decoded user when valid token provided', () => {
-      const validToken = 'valid-firebase-token';
-      const expectedUser: AuthUser = {
-        uid: 'test-user-123',
-        email: 'test@example.com',
+    it('should return decoded user when valid Firebase token provided', async () => {
+      const firebaseUser = {
+        uid: 'firebase-uid-123',
+        email: 'user@example.com',
       };
 
-      const result = service.verifyToken(validToken);
+      mockVerifyIdToken.mockResolvedValue(firebaseUser);
 
-      expect(result).toEqual(expectedUser);
+      const result = await service.verifyToken('valid-firebase-token');
+
+      expect(result).toEqual({
+        uid: 'firebase-uid-123',
+        email: 'user@example.com',
+      });
+      expect(mockVerifyIdToken).toHaveBeenCalledWith('valid-firebase-token');
     });
 
-    it('should extract userId from decoded token', () => {
-      const validToken = 'valid-firebase-token';
+    it('should extract userId from decoded token', async () => {
+      mockVerifyIdToken.mockResolvedValue({
+        uid: 'firebase-uid-123',
+        email: 'user@example.com',
+      });
 
-      const result = service.verifyToken(validToken);
+      const result = await service.verifyToken('valid-firebase-token');
 
-      expect(result.uid).toBe('test-user-123');
+      expect(result.uid).toBe('firebase-uid-123');
     });
   });
 
   describe('extractTokenFromHeader', () => {
     it('should extract token from Bearer header', () => {
       const authHeader = 'Bearer valid-token-123';
-
       const result = service.extractTokenFromHeader(authHeader);
-
       expect(result).toBe('valid-token-123');
     });
 
     it('should return null for non-Bearer header', () => {
       const authHeader = 'Basic valid-token-123';
-
       const result = service.extractTokenFromHeader(authHeader);
-
       expect(result).toBeNull();
     });
 
     it('should return null when no header provided', () => {
       const result = service.extractTokenFromHeader('');
-
       expect(result).toBeNull();
     });
   });
