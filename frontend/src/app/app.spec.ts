@@ -10,9 +10,19 @@ describe('App', () => {
 		}).compileComponents();
 	});
 
-	it('should create the app', () => {
+	it('should render header component', () => {
 		const fixture = TestBed.createComponent(App);
-		const app = fixture.componentInstance;
-		expect(app).toBeTruthy();
+		fixture.detectChanges();
+
+		const headerElement = fixture.nativeElement.querySelector('app-header');
+		expect(headerElement).toBeTruthy();
+	});
+
+	it('should render router outlet', () => {
+		const fixture = TestBed.createComponent(App);
+		fixture.detectChanges();
+
+		const routerOutlet = fixture.nativeElement.querySelector('router-outlet');
+		expect(routerOutlet).toBeTruthy();
 	});
 });

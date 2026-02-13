@@ -19,7 +19,6 @@ import type { Event } from '@features/calendar/models/event.model';
 	standalone: true,
 	imports: [CommonModule, FormsModule],
 	templateUrl: './event-modal.html',
-	styleUrl: './event-modal.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventModal {

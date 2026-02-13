@@ -25,7 +25,6 @@ interface StatsData {
 	standalone: true,
 	imports: [CommonModule, NgApexchartsModule],
 	templateUrl: './stats.html',
-	styleUrl: './stats.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Stats {

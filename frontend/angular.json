@@ -2,8 +2,8 @@
 	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
 	"version": 1,
 	"cli": {
-		"packageManager": "bun",
-		"schematicCollections": ["@schematics/angular"],
+		"packageManager": "pnpm",
+		"schematicCollections": ["@schematics/angular", "angular-eslint"],
 		"analytics": false
 	},
 	"newProjectRoot": "projects",
@@ -69,7 +69,10 @@
 					"defaultConfiguration": "development"
 				},
 				"test": {
-					"builder": "@angular/build:unit-test"
+					"builder": "@angular/build:unit-test",
+					"options": {
+						"buildTarget": "gamenight_hub:build:development"
+					}
 				},
 				"lint": {
 					"builder": "@angular-eslint/builder:lint",
