@@ -1,6 +1,7 @@
 import { NgOptimizedImage } from '@angular/common';
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '@core/services/auth';
 
 @Component({
 	selector: 'app-header',
@@ -10,15 +11,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
+	readonly #authService = inject(AuthService);
 	readonly #mobileMenuOpen = signal(false);
-	readonly #isLoggedIn = signal(false);
-	readonly #userAvatar = signal<string | null>(null);
 	readonly #notificationCount = signal(0);
 
-	readonly isMobileMenuOpen = this.#mobileMenuOpen.asReadonly();
-	readonly isLoggedIn = this.#isLoggedIn.asReadonly();
-	readonly userAvatar = this.#userAvatar.asReadonly();
+	readonly isLoggedIn = this.#authService.isLoggedIn;
+	readonly userAvatar = computed(() => this.#authService.currentUser()?.photoURL ?? null);
 	readonly notificationCount = this.#notificationCount.asReadonly();
+	readonly isMobileMenuOpen = this.#mobileMenuOpen.asReadonly();
 
 	toggleMobileMenu(): void {
 		this.#mobileMenuOpen.update((open) => !open);
@@ -26,5 +26,13 @@ export class Header {
 
 	closeMobileMenu(): void {
 		this.#mobileMenuOpen.set(false);
+	}
+
+	async login(): Promise<void> {
+		await this.#authService.login();
+	}
+
+	async logout(): Promise<void> {
+		await this.#authService.logout();
 	}
 }

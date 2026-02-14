@@ -8,7 +8,6 @@ import { faCalendarDays } from '@fortawesome/free-regular-svg-icons';
 	selector: 'app-home',
 	imports: [RouterLink, FontAwesomeModule],
 	templateUrl: './home.html',
-	styleUrl: './home.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Home {

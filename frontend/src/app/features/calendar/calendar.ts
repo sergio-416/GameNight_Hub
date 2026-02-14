@@ -14,7 +14,6 @@ import { EventModal } from './components/event-modal/event-modal';
 	standalone: true,
 	imports: [CommonModule, FullCalendarModule, EventModal],
 	templateUrl: './calendar.html',
-	styleUrl: './calendar.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Calendar implements OnInit {

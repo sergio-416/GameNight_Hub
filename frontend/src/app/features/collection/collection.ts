@@ -5,7 +5,6 @@ import { GameList } from './components/game-list/game-list';
 	selector: 'app-collection',
 	imports: [GameList],
 	templateUrl: './collection.html',
-	styleUrl: './collection.css',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Collection {}

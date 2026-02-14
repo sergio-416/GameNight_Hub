@@ -8,7 +8,6 @@ import { Game } from '../../models/game.model';
 	standalone: true,
 	imports: [CommonModule],
 	templateUrl: './game-list.html',
-	styleUrl: './game-list.css',
 })
 export class GameList implements OnInit {
 	readonly #gamesService = inject(GamesService);
